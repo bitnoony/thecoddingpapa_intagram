@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thecoddingpapa_intagram/screens/feed_page.dart';
+import 'package:thecoddingpapa_intagram/screens/profile_page.dart';
 
 class MainPage extends StatefulWidget{
   @override
@@ -14,7 +15,7 @@ class _MainPageState extends State {
     Container(color: Colors.primaries[1],),
     Container(color: Colors.primaries[2],),
     Container(color: Colors.primaries[3],),
-    Container(color: Colors.primaries[4],),
+    ProfilePage(),
   ];
 
 
