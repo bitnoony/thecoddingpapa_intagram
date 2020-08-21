@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:thecoddingpapa_intagram/constants/size.dart';
 import 'package:thecoddingpapa_intagram/utils/profile_img_path.dart';
 import 'package:thecoddingpapa_intagram/widgets/profile_side_menu.dart';
@@ -15,32 +13,34 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   AnimationController _animationController;
   bool _menuOpened = false;
   double menuWidth;
-  int duration = 200;
+  int duration = 300;
   AlignmentGeometry tabAlign = Alignment.centerLeft;
-  bool _tabIconGridSelected =true;
+  bool _tabIconGridSelected = true;
   double _gridMargin = 0;
   double _myImgGridMargin = size.width;
 
   @override
-  void initState(){
+  void initState() {
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: duration));
     super.initState();
   }
 
   @override
-  void dispose(){
+  void dispose() {
+    _animationController.dispose();
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
     menuWidth = size.width / 1.5;
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       body: Stack(
         children: <Widget>[
-          _profile(),
           _sideMenu(),
+          _profile(),
         ],
       ),
     );
@@ -53,7 +53,10 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       color: Colors.grey[200],
       duration: Duration(milliseconds: duration),
       transform: Matrix4.translationValues(
-          _menuOpened ? size.width - menuWidth : size.width, 0, 0),
+        _menuOpened ? size.width - menuWidth : size.width,
+        0,
+        0,
+      ),
       child: SafeArea(
         child: SizedBox(
           width: menuWidth,
@@ -66,9 +69,13 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   Widget _profile() {
     return AnimatedContainer(
       duration: Duration(milliseconds: duration),
-      color: Colors.transparent,
       curve: Curves.easeInOut,
-      transform: Matrix4.translationValues(_menuOpened ? -menuWidth : 0, 0, 0),
+      color: Colors.transparent,
+      transform: Matrix4.translationValues(
+        _menuOpened ? -menuWidth : 0,
+        0,
+        0,
+      ),
       child: SafeArea(
         child: Column(
           children: <Widget>[
@@ -77,14 +84,14 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
               child: CustomScrollView(
                 slivers: <Widget>[
                   SliverList(
-                    delegate: SliverChildListDelegate([_getProfileHeader,
+                      delegate: SliverChildListDelegate([
+                    _getProfileHeader,
                     _username(),
                     _userBio(),
-                      _editProfileBtn(),
-                      _getTabIconButtons,
-                      _getAnimatedSelectedBar,
-                    ]),
-                  ),
+                    _editProfileBtn(),
+                    _getTabIconButtons,
+                    _getAnimatedSelectedBar,
+                      ])),
                   _getImageGrid(context)
                 ],
               ),
@@ -97,37 +104,37 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
 
 
   SliverToBoxAdapter _getImageGrid(BuildContext context) => SliverToBoxAdapter(
-    child: Stack(
-      children: [
-        AnimatedContainer(
-          transform: Matrix4.translationValues(_gridMargin, 0, 0),
+      child: Stack(
+        children: <Widget>[
+          AnimatedContainer(
+            transform: Matrix4.translationValues(_gridMargin, 0, 0),
             duration: Duration(milliseconds: duration),
             curve: Curves.easeInOut,
             child: _imageGrid,
-            ),
-        AnimatedContainer(
+          ),
+          AnimatedContainer(
             transform: Matrix4.translationValues(_myImgGridMargin, 0, 0),
             duration: Duration(milliseconds: duration),
             curve: Curves.easeInOut,
             child: _imageGrid,
-            )
-      ],
-    ),
+          )
+        ],
+      )
   );
-
 
   GridView get _imageGrid => GridView.count(
-    physics: NeverScrollableScrollPhysics(),
-    shrinkWrap: true,
-    crossAxisCount: 3,
-    childAspectRatio: 1,
-    children:List.generate(30, (index) => _gridImgItem(index)
-    ),
-  );
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      crossAxisCount: 3,
+      childAspectRatio: 1,
+      children: List.generate(30, (index) => _gridImgItem(index)
+      ),
+    );
 
   CachedNetworkImage _gridImgItem(int index) => CachedNetworkImage(
-        fit: BoxFit.cover,
-        imageUrl: "https://picsum.photos/id/$index/100/100");
+          fit: BoxFit.cover,
+          imageUrl: "https://picsum.photos/id/$index/100/100");
+
 
 
   Padding _editProfileBtn() {
@@ -136,33 +143,36 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                       child: SizedBox(
                         height: 24,
                         child: OutlineButton(
-                          onPressed: (){},
-                          borderSide: BorderSide(color: Colors.black45),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6)
-                          ),
-                          child: Text('Edit Profile',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),),
-                        ),
-                      ),
-                    );
+                            onPressed: () {},
+                            borderSide: BorderSide(color: Colors.black45),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6)),
+                            child: Text(
+                              'Edit Profile',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                      ));
   }
 
   Padding _userBio() {
     return Padding(
                     padding: const EdgeInsets.only(left: common_gap),
-                    child: Text('Bio From User, So say something',
-                    style: TextStyle(fontWeight: FontWeight.w400),),
+                    child: Text(
+                      'Bio from User. So Say something.',
+                      style: TextStyle(fontWeight: FontWeight.w400),
+                    ),
                   );
   }
 
   Padding _username() {
     return Padding(
                     padding: const EdgeInsets.only(left: common_gap),
-                    child: Text('user real name',
-                    style: TextStyle(fontWeight: FontWeight.bold),),
+                    child: Text(
+                      'User Real Name',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   );
   }
 
@@ -172,16 +182,16 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
             padding: const EdgeInsets.all(common_gap),
             child: CircleAvatar(
               radius: 40,
-              backgroundImage: NetworkImage(getProfileImgPath('thecodingpapa')),
+              backgroundImage: NetworkImage(getProfileImgPath("thecodingpapa")),
             ),
           ),
           Expanded(
             child: Table(
               children: [
                 TableRow(children: [
-                  _getStatusValueWidget('123'),
-                  _getStatusValueWidget('345'),
-                  _getStatusValueWidget('2470'),
+                  _getStatusValueWidget('1231233'),
+                  _getStatusValueWidget('324'),
+                  _getStatusValueWidget('4536'),
                 ]),
                 TableRow(children: [
                   _getStatusLabelWidget('Posts'),
@@ -248,51 +258,55 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     );
   }
 
+
   Widget get _getTabIconButtons => Row(
     children: <Widget>[
-      Expanded(child: IconButton(
-        icon: ImageIcon(AssetImage("assets/grid.png"), color: _tabIconGridSelected?Colors.black:Colors.black26,),
-        onPressed: (){
-          _setTab(true);
-        }),),
-      Expanded(child: IconButton(
-        icon: ImageIcon(AssetImage("assets/saved.png"), color: _tabIconGridSelected?Colors.black26:Colors.black,),
-        onPressed: (){
-          _setTab(false);
-        }
-      ),),
+      Expanded(
+        child: IconButton(
+            icon: ImageIcon(AssetImage("assets/grid.png"), color: _tabIconGridSelected?Colors.black:Colors.black26,),
+            onPressed: () {
+              _setTab(true);
+            }),
+      ),
+      Expanded(
+          child: IconButton(
+              icon: ImageIcon(AssetImage("assets/saved.png"), color: _tabIconGridSelected?Colors.black26:Colors.black,),
+              onPressed: () {
+                _setTab(false);
+              })),
     ],
   );
 
- Widget get _getAnimatedSelectedBar => AnimatedContainer(
-   alignment: tabAlign,
-   duration: Duration(milliseconds: duration),
-   curve: Curves.easeInOut,
-   color: Colors.transparent,
-   height: 1,
-   width: size.width,
-   child: Container(
-     height: 1,
-     width: size.width /2,
-     color: Colors.black87,
-   ),
- );
 
-   _setTab(bool tabLeft){ setState(() {
-     if(tabLeft) {
-       this.tabAlign = Alignment.centerLeft;
-       this._tabIconGridSelected = true;
-       this._gridMargin = 0;
-       this._myImgGridMargin = size.width;
-     } else {
-       this.tabAlign = Alignment.centerRight;
-       this._tabIconGridSelected = false;
-       this._gridMargin = -size.width;
-       this._myImgGridMargin = 0;
-     }
-   });
- }
+  Widget get _getAnimatedSelectedBar => AnimatedContainer(
+    alignment: tabAlign,
+    duration: Duration(milliseconds: duration),
+    curve: Curves.easeInOut,
+    color: Colors.transparent,
+    height: 1,
+    width: size.width,
+    child: Container(
+      height: 1,
+      width: size.width / 2,
+      color: Colors.black87,
+    ),
+  );
 
+  _setTab(bool tabLeft) {
+    setState(() {
+      if (tabLeft) {
+        this.tabAlign = Alignment.centerLeft;
+        this._tabIconGridSelected = true;
+        this._gridMargin = 0;
+        this._myImgGridMargin = size.width;
 
+      } else {
+        this.tabAlign = Alignment.centerRight;
+        this._tabIconGridSelected = false;
+        this._gridMargin = -size.width;
+        this._myImgGridMargin = 0;
+      }
+    });
+  }
 
 }

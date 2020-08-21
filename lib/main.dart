@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:thecoddingpapa_intagram/constants/material_white_color.dart';
-import 'package:thecoddingpapa_intagram/main_page.dart';
+import 'main_page.dart';
 
-
-
-void main() {
+void main(){
   return runApp(MyApp());
 }
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,4 +16,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 

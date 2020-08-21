@@ -26,33 +26,33 @@ class Comment extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: showProfile,
-            child: SizedBox(width: common_xs_gap,
-          ),
-        ),
+            visible: showProfile,
+            child: SizedBox(width: common_xs_gap,)),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              RichText(text: TextSpan(
-                  style: DefaultTextStyle.of(context).style,
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: username,
-                        style: TextStyle(fontWeight: FontWeight.bold)
-                    ),
-                    TextSpan(
-                        text: " "
-                    ),
-                    TextSpan(
-                        text: caption
-                    ),
-                  ]
-              ),),
+              RichText(
+                text: TextSpan(
+                    style: DefaultTextStyle.of(context).style,
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: username,
+                          style: TextStyle(fontWeight: FontWeight.bold)
+                      ),
+                      TextSpan(
+                          text: " "
+                      ),
+                      TextSpan(
+                          text: caption
+                      ),
+                    ]
+                ),
+              ),
               SizedBox(height: common_xxxs_gap,),
               Visibility(
-                  visible: dateTime != null,
-                  child: dateTime == null ? SizedBox() : Text(dateTime.toIso8601String(), style: TextStyle(color: Colors.grey[600], fontSize: 10),)),
+                visible: dateTime != null,
+                  child: dateTime == null? SizedBox() : Text(dateTime.toIso8601String(), style: TextStyle(color: Colors.grey[600], fontSize: 10),)),
             ],
           ),
         )

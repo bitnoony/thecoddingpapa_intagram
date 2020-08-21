@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:thecoddingpapa_intagram/constants/size.dart';
 import 'package:thecoddingpapa_intagram/utils/profile_img_path.dart';
 import 'package:thecoddingpapa_intagram/widgets/comment.dart';
+import 'package:thecoddingpapa_intagram/widgets/my_progress_indicator.dart';
 
 class FeedPage extends StatelessWidget {
   @override
@@ -68,8 +69,8 @@ class FeedPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
           horizontal: common_gap, vertical: common_xs_gap),
       child: Comment(
-        username: 'usernme @index',
-        caption: 'I love summer soooooooooooooooooooo much~~~~~~~!!!!',
+        username: 'username $index',
+        caption: 'I love summer soooooooooooooo much~~~~~~~~~~!!!!',
       ),
     );
   }
@@ -147,26 +148,18 @@ class FeedPage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: 'https://picsum.photos/id/$index/200/200',
       placeholder: (context, url) {
-        return Container(
-          width: size.width,
-          height: size.width,
-          child: Center(
-            child: SizedBox(
-              width: 30,
-              height: 30,
-              child: Image.asset('assets/loading_img.gif'),
-            ),
-          ),
-        );
+        return new MyProgressIndicator();
       },
-      imageBuilder: (BuildContext context, ImageProvider imagePrivider) =>
+      imageBuilder: (BuildContext context, ImageProvider imageProvider) =>
           AspectRatio(
         aspectRatio: 1,
         child: Container(
           decoration: BoxDecoration(
-              image: DecorationImage(image: imagePrivider, fit: BoxFit.cover)),
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
         ),
       ),
     );
   }
 }
+
+

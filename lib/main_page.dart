@@ -1,33 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:thecoddingpapa_intagram/constants/size.dart';
+import 'package:thecoddingpapa_intagram/screens/camera_page.dart';
 import 'package:thecoddingpapa_intagram/screens/feed_page.dart';
 import 'package:thecoddingpapa_intagram/screens/profile_page.dart';
+import 'package:thecoddingpapa_intagram/screens/search_page.dart';
+import 'package:thecoddingpapa_intagram/widgets/my_progress_indicator.dart';
 
 class MainPage extends StatefulWidget{
   @override
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State {
+class _MainPageState extends State<MainPage> {
+
   int _selectedIndex = 0;
 
-  static List<Widget> _widgetOptions = [
+  static List<Widget> _widgetOptions = <Widget>[
     FeedPage(),
-    Container(color: Colors.primaries[1],),
+    SearchPage(),
     Container(color: Colors.primaries[2],),
-    Container(color: Colors.primaries[3],),
+    MyProgressIndicator( progressSize: 100,),
     ProfilePage(),
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
     if(size == null){
-      size = MediaQuery.of(context).size;
+      size = MediaQuery
+          .of(context)
+          .size;
     }
     return Scaffold(
-
       body: IndexedStack(
         index: _selectedIndex,
         children: _widgetOptions,
@@ -39,7 +42,7 @@ class _MainPageState extends State {
         selectedItemColor: Colors.black,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color.fromRGBO(249, 249, 249, 1),
-        items: [
+        items: <BottomNavigationBarItem>[
           _buildBottomNavigationBarItem(activeIconPath: "assets/home_selected.png", iconPath: "assets/home.png"),
           _buildBottomNavigationBarItem(activeIconPath: "assets/search_selected.png", iconPath: "assets/search.png"),
           _buildBottomNavigationBarItem(iconPath: "assets/add.png"),
@@ -57,14 +60,25 @@ class _MainPageState extends State {
       activeIcon: activeIconPath == null ? null : ImageIcon(AssetImage(activeIconPath)),
       icon: ImageIcon(AssetImage(iconPath)),
       title: Text(''),
-
     );
   }
 
-  void  _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  void _onItemTapped(int index) {
+    if(index == 2){
+      openCamera(context);
+    }else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+  }
+
+  openCamera(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => CameraPage()),
+    );
   }
 
 }
