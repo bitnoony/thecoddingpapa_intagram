@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thecoddingpapa_intagram/constants/size.dart';
 import 'package:thecoddingpapa_intagram/screens/feed_page.dart';
 import 'package:thecoddingpapa_intagram/screens/profile_page.dart';
 
@@ -22,6 +23,9 @@ class _MainPageState extends State {
 
   @override
   Widget build(BuildContext context) {
+    if(size == null){
+      size = MediaQuery.of(context).size;
+    }
     return Scaffold(
 
       body: IndexedStack(

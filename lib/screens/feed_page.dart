@@ -56,7 +56,12 @@ class FeedPage extends StatelessWidget {
     );
   }
 
-  FlatButton _allComments() => FlatButton(onPressed: null, child: Text('show all 18 comments', style: TextStyle(color: Colors.grey[600]),));
+  FlatButton _allComments() => FlatButton(
+      onPressed: null,
+      child: Text(
+        'show all 18 comments',
+        style: TextStyle(color: Colors.grey[600]),
+      ));
 
   Padding _postCaption(BuildContext context, int index) {
     return Padding(
@@ -141,6 +146,19 @@ class FeedPage extends StatelessWidget {
   CachedNetworkImage _postImage(int index) {
     return CachedNetworkImage(
       imageUrl: 'https://picsum.photos/id/$index/200/200',
+      placeholder: (context, url) {
+        return Container(
+          width: size.width,
+          height: size.width,
+          child: Center(
+            child: SizedBox(
+              width: 30,
+              height: 30,
+              child: Image.asset('assets/loading_img.gif'),
+            ),
+          ),
+        );
+      },
       imageBuilder: (BuildContext context, ImageProvider imagePrivider) =>
           AspectRatio(
         aspectRatio: 1,
