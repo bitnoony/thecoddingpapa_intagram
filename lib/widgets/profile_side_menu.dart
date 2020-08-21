@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thecoddingpapa_intagram/constants/size.dart';
 import 'package:thecoddingpapa_intagram/screens/auth_page.dart';
@@ -25,8 +26,7 @@ class ProfileSideMenu extends StatelessWidget {
           ),
           FlatButton.icon(
               onPressed: (){
-                final route = MaterialPageRoute(builder: (context)=>AuthPage());
-                Navigator.pushReplacement(context, route);
+                FirebaseAuth.instance.signOut();
               },
               icon: Icon(Icons.exit_to_app),
               label: Text(
