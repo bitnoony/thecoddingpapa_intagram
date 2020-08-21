@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "229695137865",
+    "firebase_url": "https://instagram-clone-second-c-b64fb.firebaseio.com",
+    "project_id": "instagram-clone-second-c-b64fb",
+    "storage_bucket": "instagram-clone-second-c-b64fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229695137865:android:612caff5b35752115fb798",
+        "android_client_info": {
+          "package_name": "com.example.thecoddingpapa_intagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229695137865-c6iuqusnm1vistdbud6e43598r2s0sa3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYOuQ8YFMvS5owPGXighol2wtgc26LcVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229695137865-c6iuqusnm1vistdbud6e43598r2s0sa3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

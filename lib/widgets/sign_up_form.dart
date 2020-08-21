@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thecoddingpapa_intagram/constants/size.dart';
 import 'package:thecoddingpapa_intagram/main_page.dart';
@@ -81,9 +82,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 FlatButton(
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
-                      final route =
-                          MaterialPageRoute(builder: (context) => MainPage());
-                      Navigator.pushReplacement(context, route);
+                      _resister;
                     }
                   },
                   child: Text(
@@ -141,6 +140,17 @@ class _SignUpFormState extends State<SignUpForm> {
             )),
       ),
     );
+  }
+
+  get _resister async {
+    final AuthResult result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailConstroller.text, password: _pwConstroller.text) ;
+    
+    final FirebaseUser user = result.user ;
+    if(user == null) {
+      final snackBar = SnackBar(content: test('Please try again later!'));
+      Scaffold.of(context).showSnackBar(snackBar);
+    }
   }
 
   InputDecoration getTextFieldDecor(String hint) {
