@@ -54,6 +54,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   height: common_xs_gap,
                 ),
                 TextFormField(
+                  obscureText: true,
                   controller: _pwConstroller,
                   decoration: getTextFieldDecor('Password'),
                   validator: (String value) {
@@ -63,10 +64,9 @@ class _SignUpFormState extends State<SignUpForm> {
                     return null;
                   },
                 ),
-                SizedBox(
-                  height: common_xs_gap,
-                ),
+                Spacer(flex: 1,),
                 TextFormField(
+                  obscureText: true,
                   controller: _cpwConstroller,
                   decoration: getTextFieldDecor('Confirm Password'),
                   validator: (String value) {
@@ -76,13 +76,11 @@ class _SignUpFormState extends State<SignUpForm> {
                     return null;
                   },
                 ),
-                SizedBox(
-                  height: common_s_gap,
-                ),
+                Spacer(flex: 2,),
                 FlatButton(
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
-                      _resister;
+                      _register;
                     }
                   },
                   child: Text(
@@ -94,9 +92,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       borderRadius: BorderRadius.circular(6)),
                   disabledColor: Colors.blue[100],
                 ),
-                SizedBox(
-                  height: common_s_gap,
-                ),
+                Spacer(flex: 2,),
                 Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
@@ -142,14 +138,13 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  get _resister async {
+  get _register async {
     final AuthResult result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailConstroller.text, password: _pwConstroller.text) ;
     
     final FirebaseUser user = result.user ;
     if(user == null) {
-      final snackBar = SnackBar(content: Text('Please try again later!'));
-      Scaffold.of(context).showSnackBar(snackBar);
+      simpleSnackbar(context, 'Please try again later!');
     }
   }
 

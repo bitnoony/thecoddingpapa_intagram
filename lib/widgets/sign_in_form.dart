@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thecoddingpapa_intagram/constants/size.dart';
 import 'package:thecoddingpapa_intagram/main_page.dart';
@@ -33,13 +34,9 @@ class _SigninFormState extends State<SigninForm> {
 //              mainAxisSize: MainAxisSize.max,
 //              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                SizedBox(
-                  height: common_l_gap,
-                ),
+                Spacer(flex: 6,),
                 Image.asset("assets/insta_text_logo.png"),
-                SizedBox(
-                  height: common_xs_gap,
-                ),
+                Spacer(flex: 1,),
                 TextFormField(
                   controller: _emailConstroller,
                   decoration: getTextFieldDecor('Email'),
@@ -54,6 +51,7 @@ class _SigninFormState extends State<SigninForm> {
                   height: common_xs_gap,
                 ),
                 TextFormField(
+                  obscureText: true,
                   controller: _pwConstroller,
                   decoration: getTextFieldDecor('Password'),
                   validator: (String value) {
@@ -72,15 +70,11 @@ class _SigninFormState extends State<SigninForm> {
                   style: TextStyle(
                       color: Colors.blue[700], fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
-                  height: common_s_gap,
-                ),
+                Spacer(flex: 2,),
                 FlatButton(
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
-                      final route =
-                          MaterialPageRoute(builder: (context) => MainPage());
-                      Navigator.pushReplacement(context, route);
+                      _login;
                     }
                   },
                   child: Text(
@@ -92,9 +86,7 @@ class _SigninFormState extends State<SigninForm> {
                       borderRadius: BorderRadius.circular(6)),
                   disabledColor: Colors.blue[100],
                 ),
-                SizedBox(
-                  height: common_s_gap,
-                ),
+                Spacer(flex: 2,),
                 Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
@@ -139,6 +131,19 @@ class _SigninFormState extends State<SigninForm> {
       ),
     );
   }
+
+  get _login async{
+    final AuthResult result = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailConstroller.text,
+        password: _pwConstroller.text);
+    final FirebaseUser user = result.user;
+
+    if (user == null){
+       simpleSnackbar(context, 'Please try again later!');
+    }
+  }
+
+
 
   InputDecoration getTextFieldDecor(String hint) {
     return InputDecoration(
