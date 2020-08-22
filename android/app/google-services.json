@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "229695137865",
-    "firebase_url": "https://instagram-clone-second-c-b64fb.firebaseio.com",
-    "project_id": "instagram-clone-second-c-b64fb",
-    "storage_bucket": "instagram-clone-second-c-b64fb.appspot.com"
+    "project_number": "460318089732",
+    "firebase_url": "https://thecoddingpapa-instagram.firebaseio.com",
+    "project_id": "thecoddingpapa-instagram",
+    "storage_bucket": "thecoddingpapa-instagram.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:229695137865:android:612caff5b35752115fb798",
+        "mobilesdk_app_id": "1:460318089732:android:18cc1a70e4cef76a5d0b51",
         "android_client_info": {
           "package_name": "com.example.thecoddingpapa_intagram"
         }
       },
       "oauth_client": [
         {
-          "client_id": "229695137865-c6iuqusnm1vistdbud6e43598r2s0sa3.apps.googleusercontent.com",
+          "client_id": "460318089732-lajh0ag64jv61785one8j23gp9ce2mll.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDYOuQ8YFMvS5owPGXighol2wtgc26LcVs"
+          "current_key": "AIzaSyC1W4EXQIyZKnndChs-wHmSBNKf_Iya2-k"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "229695137865-c6iuqusnm1vistdbud6e43598r2s0sa3.apps.googleusercontent.com",
+              "client_id": "460318089732-lajh0ag64jv61785one8j23gp9ce2mll.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
