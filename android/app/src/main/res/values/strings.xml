@@ -2,5 +2,6 @@
 <resources>
     <string name="facebook_app_id">626862287964951</string>
     <string name="fb_login_protocol_scheme">fb626862287964951</string>
+    <string name="app_name">Instclone</string>
 
 </resources>
